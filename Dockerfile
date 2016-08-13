@@ -4,8 +4,8 @@ MAINTAINER nkmry <nkmry333@gmail.com>
 
 WORKDIR /root
 
-RUN apt-get update --fix-missing
-RUN apt-get upgrade -y --fix-missing
+#RUN apt-get update --fix-missing
+#RUN apt-get upgrade -y --fix-missing
 #RUN apt-get install -y --fix-missing build-essential
 RUN apt-get install -y --fix-missing wget
 RUN apt-get install -y --fix-missing gcc
