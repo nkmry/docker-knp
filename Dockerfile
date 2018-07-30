@@ -9,7 +9,10 @@ ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:ja
 ENV LC_ALL ja_JP.UTF-8
 
-RUN apt-get update --fix-missing &&\
+# Change DNS to Google Public DNS
+RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null &&\
+# Install depended packages
+    apt-get update --fix-missing &&\
     apt-get upgrade -y --fix-missing &&\
 #RUN apt-get install -y --fix-missing build-essential
     apt-get install -y --fix-missing wget &&\
