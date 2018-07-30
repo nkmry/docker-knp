@@ -34,9 +34,9 @@ RUN apt-get update --fix-missing &&\
     apt-get update && apt-get install -y --fix-missing libjuman4 &&\
 # install KNP
     apt-get install -y --fix-missing zlib1g-dev &&\
-    wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.16.tar.bz2 &&\
-    tar xf knp-4.16.tar.bz2 &&\
-    cd knp-4.16/ &&\
+    wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.19.tar.bz2 &&\
+    tar xf knp-4.19.tar.bz2 &&\
+    cd knp-4.19/ &&\
     ./configure && make && make install &&\
     cd .. &&\
-    rm knp-4.16.tar.bz2 && rm -rf knp-4.16
+    rm knp-4.19.tar.bz2 && rm -rf knp-4.19
