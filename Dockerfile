@@ -14,15 +14,15 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null &&\
 # Install depended packages
     apt-get update --fix-missing &&\
     apt-get upgrade -y --fix-missing &&\
-    apt-get install -y wget gcc g++ make bzip2 cmake xz-utils cmake xz-utils zlib1g-dev &&\
+    apt-get install -y wget gcc g++ make bzip2 cmake xz-utils cmake xz-utils zlib1g-dev
 
 # to use Japanese
-    apt-get install -y locales --no-install-recommends &&\
+RUN apt-get install -y locales --no-install-recommends &&\
     rm -rf /var/lib/apt/lists/* &&\
-    locale-gen ja_JP.UTF-8 &&\
+    locale-gen ja_JP.UTF-8
 
 # install JUMAN++
-    wget https://github.com/ku-nlp/jumanpp/releases/download/v2.0.0-rc2/jumanpp-2.0.0-rc2.tar.xz &&\
+RUN wget https://github.com/ku-nlp/jumanpp/releases/download/v2.0.0-rc2/jumanpp-2.0.0-rc2.tar.xz &&\
     tar xf jumanpp-2.0.0-rc2.tar.xz &&\
     cd jumanpp-2.0.0-rc2/ &&\ 
     mkdir bld &&\
@@ -30,9 +30,19 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null &&\
     cmake .. -DCMAKE_BUILD_TYPE=Release &&\
     make install &&\
     cd ../../ &&\
-    rm -rf jumanpp-2.0.0-rc2.tar.xz jumanpp-2.0.0-rc2 &&\
+    rm -rf jumanpp-2.0.0-rc2.tar.xz jumanpp-2.0.0-rc2
+
+# install JUMAN
+RUN wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2 &&\ 
+    tar xf juman-7.01.tar.bz2 &&\
+    cd juman-7.01/ &&\ 
+    ./configure && make && make install &&\
+    cd .. &&\
+    rm juman-7.01.tar.bz2 && rm -rf juman-7.01 &&\
+    apt-get update && apt-get install -y --fix-missing libjuman4
+
 # install KNP
-    wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.19.tar.bz2 &&\
+RUN wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.19.tar.bz2 &&\
     tar xf knp-4.19.tar.bz2 &&\
     cd knp-4.19/ &&\
     ./configure && make && make install &&\
