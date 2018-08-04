@@ -27,15 +27,20 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null &&\
     rm -rf /var/lib/apt/lists/* &&\
     locale-gen ja_JP.UTF-8 &&\
 
-# install JUMAN
-    wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2 &&\ 
-    tar xf juman-7.01.tar.bz2 &&\
-    cd juman-7.01/ &&\ 
-    ./configure && make && make install &&\
-    cd .. &&\
-    rm juman-7.01.tar.bz2 && rm -rf juman-7.01 &&\
-    apt-get update && apt-get install -y --fix-missing libjuman4 &&\
+# install JUMAN++
+    apt-get update --fix-missing &&\
+    apt-get install -y cmake xz-utils &&\
+    wget https://github.com/ku-nlp/jumanpp/releases/download/v2.0.0-rc2/jumanpp-2.0.0-rc2.tar.xz &&\
+    tar xf jumanpp-2.0.0-rc2.tar.xz &&\
+    cd jumanpp-2.0.0-rc2/ &&\ 
+    mkdir bld &&\
+    cd bld &&\
+    cmake .. -DCMAKE_BUILD_TYPE=Release &&\
+    make install &&\
+    cd ../../ &&\
+    rm -rf jumanpp-2.0.0-rc2.tar.xz jumanpp-2.0.0-rc2 &&\
 # install KNP
+    apt-get update --fix-missing &&\
     apt-get install -y --fix-missing zlib1g-dev &&\
     wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.19.tar.bz2 &&\
     tar xf knp-4.19.tar.bz2 &&\
