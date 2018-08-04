@@ -14,13 +14,7 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null &&\
 # Install depended packages
     apt-get update --fix-missing &&\
     apt-get upgrade -y --fix-missing &&\
-#RUN apt-get install -y --fix-missing build-essential
-    apt-get install -y --fix-missing wget &&\
-    apt-get install -y --fix-missing gcc &&\
-    apt-get install -y --fix-missing g++ &&\
-    apt-get install -y --fix-missing make &&\
-# to decompress *.tar.bz2
-    apt-get install -y --fix-missing bzip2 &&\
+    apt-get install -y wget gcc g++ make bzip2 cmake xz-utils cmake xz-utils zlib1g-dev &&\
 
 # to use Japanese
     apt-get install -y locales --no-install-recommends &&\
@@ -28,8 +22,6 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null &&\
     locale-gen ja_JP.UTF-8 &&\
 
 # install JUMAN++
-    apt-get update --fix-missing &&\
-    apt-get install -y cmake xz-utils &&\
     wget https://github.com/ku-nlp/jumanpp/releases/download/v2.0.0-rc2/jumanpp-2.0.0-rc2.tar.xz &&\
     tar xf jumanpp-2.0.0-rc2.tar.xz &&\
     cd jumanpp-2.0.0-rc2/ &&\ 
@@ -40,8 +32,6 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null &&\
     cd ../../ &&\
     rm -rf jumanpp-2.0.0-rc2.tar.xz jumanpp-2.0.0-rc2 &&\
 # install KNP
-    apt-get update --fix-missing &&\
-    apt-get install -y --fix-missing zlib1g-dev &&\
     wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.19.tar.bz2 &&\
     tar xf knp-4.19.tar.bz2 &&\
     cd knp-4.19/ &&\
